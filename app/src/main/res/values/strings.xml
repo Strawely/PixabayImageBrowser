@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PixabayImageBrowser</string>
+    <string name="main_screen_search_placeholder">Search</string>
+    <string name="main_screen_error_text">Error</string>
+    <string name="details_dialog_title">Open details?</string>
+    <string name="details_dialog_button">Open</string>
+</resources>

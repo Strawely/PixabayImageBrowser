@@ -1,0 +1,108 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+apply from: "${rootDir}/gradle/dependencies.gradle"
+
+def apikey = getApiKeyFromProps()
+
+def apikeyProperties() {
+    def apikeyFile = new File("${rootDir}/apikey.properties")
+    Properties apikeyProps = new Properties()
+    if (apikeyFile.canRead()) {
+        apikeyProps.load(new FileInputStream(apikeyFile))
+    }
+    return apikeyProps
+}
+
+def getApiKeyFromProps() {
+    def properties = apikeyProperties()
+    if (properties['apikey'] != null) {
+        return properties['apikey']
+    } else {
+        def systemApiKey = System.getenv("API_KEY")
+        if (systemApiKey != null) {
+            return systemApiKey
+        } else {
+            return "null"
+        }
+    }
+}
+
+android {
+    namespace 'com.solomyannyy.pixabayimagebrowser'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.solomyannyy.pixabayimagebrowser"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_KEY", apikey
+        }
+        debug {
+            buildConfigField "String", "API_KEY", apikey
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        compose true
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'com.google.android.material:material:1.7.0'
+
+    implementation deps.androidx.activity_compose
+    implementation deps.androidx.viewModel_compose
+    implementation deps.androidx.paging
+    implementation deps.androidx.paging_compose
+    implementation deps.androidx.navigation_compose
+    implementation deps.androidx.hilt_compose
+    implementation deps.androidx.room_runtime
+    implementation deps.androidx.room_ktx
+    implementation deps.androidx.room_paging
+    kapt deps.androidx.room_compiler
+
+    implementation deps.accompanist
+    implementation deps.coil
+    implementation deps.coroutines
+
+    implementation deps.squareup.retrofit2
+    implementation deps.squareup.moshi_converter
+    implementation deps.squareup.moshi
+    implementation deps.squareup.logging_interceptor
+
+    implementation deps.compose.compiler
+    implementation deps.compose.foundation
+    implementation deps.compose.material
+    implementation deps.compose.runtime
+    implementation deps.compose.tooling
+
+    implementation deps.google.hilt
+    kapt deps.google.hilt_kapt
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

@@ -1,0 +1,44 @@
+ext.versions = [
+        androidx        : "1.6.1",
+        compose         : "1.3.1",
+        compose_compiler: "1.4.0",
+        hilt            : "2.44.2",
+        paging          : "3.1.1",
+        nav_version     : "2.5.3",
+        room            : "2.5.0"
+]
+
+ext.deps = [
+        androidx: [
+                activity_compose        : "androidx.activity:activity-compose:${versions.androidx}",
+                viewModel_compose       : "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1",
+                paging                  : "androidx.paging:paging-runtime:${versions.paging}",
+                paging_compose          : "androidx.paging:paging-compose:1.0.0-alpha17",
+                navigation_compose      : "androidx.navigation:navigation-compose:${versions.nav_version}",
+                hilt_compose            : "androidx.hilt:hilt-navigation-compose:1.0.0",
+                room_runtime            : "androidx.room:room-runtime:${versions.room}",
+                room_compiler           : "androidx.room:room-compiler:${versions.room}",
+                room_ktx                : "androidx.room:room-ktx:${versions.room}",
+                room_paging             : "androidx.room:room-paging:${versions.room}"
+        ],
+        accompanist             : "com.google.accompanist:accompanist-flowlayout:0.28.0",
+        google  : [
+                hilt            : "com.google.dagger:hilt-android:${versions.hilt}",
+                hilt_kapt       : "com.google.dagger:hilt-compiler:${versions.hilt}",
+        ],
+        compose : [
+                foundation      : "androidx.compose.foundation:foundation:${versions.compose}",
+                material        : "androidx.compose.material:material:${versions.compose}",
+                runtime         : "androidx.compose.runtime:runtime:${versions.compose}",
+                compiler        : "androidx.compose.compiler:compiler:${versions.compose_compiler}",
+                tooling         : "androidx.compose.ui:ui-tooling:${versions.compose}"
+        ],
+        coil    : "io.coil-kt:coil-compose:2.2.2",
+        coroutines : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4",
+        squareup: [
+                retrofit2               : "com.squareup.retrofit2:retrofit:2.9.0",
+                moshi_converter         : "com.squareup.retrofit2:converter-moshi:2.4.0",
+                moshi                   : "com.squareup.moshi:moshi-kotlin:1.14.0",
+                logging_interceptor     : "com.squareup.okhttp3:logging-interceptor:4.10.0"
+        ],
+]
